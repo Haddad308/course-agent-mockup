@@ -67,9 +67,16 @@ export default function CreateCourse() {
   const router = useRouter();
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
-  const [topics, setTopics] = useState<any[]>([]);
-  const [selectedTopic, setSelectedTopic] = useState<any>(null);
-  const [selectedModules, setSelectedModules] = useState<any[]>([]);
+  const [topics, setTopics] = useState<
+    { title: string; description: string }[]
+  >([]);
+  const [selectedTopic, setSelectedTopic] = useState<{
+    title: string;
+    description: string;
+  } | null>(null);
+  const [selectedModules, setSelectedModules] = useState<
+    { title: string; duration: string; lessons: number }[]
+  >([]);
   const [generating, setGenerating] = useState(false);
 
   const handleGenerateTopics = async () => {
@@ -228,10 +235,10 @@ export default function CreateCourse() {
                 <div className="flex items-center justify-between">
                   <div className="space-y-1">
                     <h2 className="text-xl font-semibold text-purple-900">
-                      {selectedTopic.title}
+                      {selectedTopic?.title}
                     </h2>
                     <p className="text-sm text-purple-600">
-                      {selectedTopic.description}
+                      {selectedTopic?.description}
                     </p>
                   </div>
                   <Button
@@ -321,7 +328,7 @@ export default function CreateCourse() {
                       Course Title
                     </div>
                     <Card className="p-4 border-purple-100 bg-purple-50">
-                      {selectedTopic.title}
+                      {selectedTopic?.title}
                     </Card>
                   </div>
 
@@ -330,7 +337,7 @@ export default function CreateCourse() {
                       Description
                     </div>
                     <Card className="p-4 border-purple-100 bg-purple-50">
-                      {selectedTopic.description}
+                      {selectedTopic?.description}
                     </Card>
                   </div>
 
